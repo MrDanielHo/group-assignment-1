@@ -3,7 +3,7 @@ const fs = require('fs');
 
 const db = require('./connect');
 
-const sql = fs.readFileSync(__dirname + '/quiz.sql').toString();
+const sql = fs.readFileSync(__dirname + '/setup.sql').toString();
 
 
 db.query(sql)
