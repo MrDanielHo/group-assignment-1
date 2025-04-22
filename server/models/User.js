@@ -17,6 +17,14 @@ class User {
     return response.rows.map(g => new User(g));
   }
 
+//   static async getTopScore() {
+//     const response = await db.query("SELECT * FROM snacks ORDER BY votes DESC LIMIT 5;");
+//     if (response.rows.length != 1) {
+//       throw new Error("Unable to locate top scorers.")
+//     }
+//     return new Snack(response.rows[0]);
+//   }
+
   static async findById(user_id) {
     try {
       const userData = await db.query('SELECT * FROM users WHERE user_id = $1', [user_id])
