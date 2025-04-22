@@ -1,3 +1,4 @@
+/* nav bar */
 .nav-bar {
     display: flex;
     align-items: center;
@@ -11,4 +12,63 @@
     display: flex;
     gap: 20px;
     color: azure;
+  }
+
+  /* table */
+  #container {
+    width: 600px;
+    height: auto;
+  }
+  
+  .row {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 40px;
+    border-bottom: 1px solid #AFAFAF;
+  }
+  
+  .name {
+    position: relative;
+    display: inline-block;
+    width: 75%;
+    line-height: 45px;
+  }
+  
+  .score {
+    position: relative;
+    display: inline-block;
+    width: 25%;
+  }
+  
+  .row:nth-child(1) {
+    background: gold;
+  }
+  .row:nth-child(2) {
+    background: #c0c0c0;
+  }
+  
+  .row:nth-child(3) {
+    background: #cd7f32;
+  }  
+
+  /* Header row styling */
+
+  .header-row {
+    display: flex;
+    width: 600px; /* Match the container width */
+    height: 40px;
+    border-bottom: 1px solid #AFAFAF;
+  }
+
+  .name-header {
+    width: 75%; /* Match the width of .name */
+    line-height: 45px; /* Match the line-height of .name */
+    font-weight: bold;
+  }
+
+  .score-header {
+    width: 25%; 
+    line-height: 45px;
+    font-weight: bold;
   }
