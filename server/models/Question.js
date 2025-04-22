@@ -13,5 +13,13 @@ class Question {
         this.game_id = game_id;
     }
 
-    
+    static async getAll() {
+        const response = await db.query("SELECT * FROM questions ORDER BY id;");
+
+        if (response.rows.length === 0) {
+        throw new Error("No questions were found.")
+        }
+
+        return response.rows.map(q => new Question(q));
+    }
 }
