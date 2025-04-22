@@ -22,4 +22,14 @@ class Question {
 
         return response.rows.map(q => new Question(q));
     }
+
+    static async getOneById(questionId) {
+        const response = await db.query("SELECT * FROM questions WHERE id = $1",
+      [questionId]);
+
+      if (response.rows.length != 1) {
+        throw new Error("No question found.");
+      }
+      return new Question(response.rows[0]);
+    }
 }
