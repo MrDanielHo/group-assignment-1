@@ -17,7 +17,10 @@ CREATE TABLE learing_resouces (
     answer VARCHAR(100) NOT NULL,
     fact1 VARCHAR(255) NOT NULL, 
     fact2 VARCHAR(255) NOT NULL, 
-    fact3 VARCHAR(255) NOT NULL, 
+    fact3 VARCHAR(255) NOT NULL,
+    fact4 VARCHAR(255) NOT NULL,
+    fact5 VARCHAR(255) NOT NULL,
+    fact6 VARCHAR(255) NOT NULL, 
     PRIMARY KEY(resouce_id)
 );
 
@@ -32,7 +35,7 @@ VALUES
     ('Alexa Lemon', 'd.dyson@lafosse.com', 'test123!', FALSE, '200');
 
 
-INSERT INTO learing_resouces (subject, answer, fact1, fact2, fact3)
+INSERT INTO learning_resouces (subject, answer, fact1, fact2, fact3)
 VALUES ('geography', 'United Kingdom', 'Hosted the 2012 Summer Olympics', 'Birthplace of football', 'Is made up of 4 countries'),
 ('geography', 'France', 'The world''s most visited country', 'Home to the highest mountain in Europe', 'The largest country in Western Europe'),
 ('geography', 'Germany', 'Invented the gummy bear', 'Where mainland Europe''s longest river begins', 'The first country to fully implement daylight saving hours'),
