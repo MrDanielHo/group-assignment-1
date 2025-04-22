@@ -1,13 +1,4 @@
-DROP TABLE IF EXISTS user, question;
-
-CREATE TABLE user (
-    id INT GENERATED ALWAYS AS IDENTITY,
-    name VARCHAR(50) NOT NULL,
-    email VARCHAR(50) NOT NULL,
-    password VARCHAR(50) NOT NULL,
-    score Int DEFAULT = 0,
-    PRIMARY KEY (id)
-);
+DROP TABLE IF EXISTS users, question;
 
 CREATE TABLE question (
     question_id INT GENERATED ALWAYS AS IDENTITY,
@@ -19,5 +10,5 @@ CREATE TABLE question (
     wrong_answer_3 VARCHAR(250) NOT NULL,
     points INT NOT NULL,
     image_url VARCHAR(300),
-    PRIMARY KEY (id)
+    PRIMARY KEY (question_id)
 );
