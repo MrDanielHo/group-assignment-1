@@ -8,7 +8,7 @@ CREATE TABLE users (
     email VARCHAR(50) NOT NULL,
     password VARCHAR(50) NOT NULL,
     isAdmin BOOLEAN DEFAULT FALSE NOT NULL,
-    score Int DEFAULT = 0,
+    score INT DEFAULT 0,
     PRIMARY KEY (id)
 );
 
@@ -21,7 +21,7 @@ CREATE TABLE questions (
     wrong_answer_2 VARCHAR(250) NOT NULL,
     wrong_answer_3 VARCHAR(250) NOT NULL,
     image_url VARCHAR(300),
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
     CONSTRAINT fk_game
         FOREIGN KEY(game_id)
         REFERENCES games(game_id)
@@ -32,7 +32,7 @@ CREATE TABLE games (
     name VARCHAR(250) NOT NULL,
     subject VARCHAR(50) NOT NULL,
     resource_url VARCHAR(300),
-    PRIMARY KEY (id)
+    PRIMARY KEY (game_id)
 );
 
 INSERT INTO users (name, email, password, isAdmin, score) 
