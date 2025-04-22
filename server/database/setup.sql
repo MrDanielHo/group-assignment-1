@@ -68,7 +68,15 @@ INSERT INTO questions (id,
 (9, 'What is the capital city of Russia?', 'Geography','Moscow', 'Saint Petersburg', 'Vladivostok', 'Novosibirisk', '', 1),
 (10, 'What is the capital city of Kenya?', 'Geography','Nairobi', 'Mombasa', 'Kisumu', 'Eldoret', '', 1),
 (11, 'Which continent is Brazil located in?', 'Geography', 'South America', 'Africa', 'Europe', 'Asia', '', 2),
-(12, 'What ocean is on the east coast of the United States?', 'Geography', 'Atlantic Ocean', 'Pacific Ocean', 'Indian Ocean', 'Arctic Ocean', '', 2);
+(12, 'What ocean is on the East coast of the United States?', 'Geography', 'Atlantic Ocean', 'Pacific Ocean', 'Indian Ocean', 'Arctic Ocean', '', 2);
+(13, 'Which is the largest ocean on Earth?', 'Geography', 'Atlantic Ocean', 'Pacific Ocean', 'Indian Ocean', 'Arctic Ocean', '', 2);
+(14, "What is the deepest known point in the world's oceans called?", 'Geography', 'Challenger Deep', 'Deep Abyss', 'Mariana Trench', 'Abyss of Calypso', '', 2);
+(15, 'Which ocean is almost entirely located within the Arctic Circle?', 'Geography', 'Atlantic Ocean', 'Pacific Ocean', 'Indian Ocean', 'Arctic Ocean', '', 2);
+(16, 'Which of these continents is NOT bordered by the Indian Ocean?', 'Geography', 'South America', 'Australia', 'Asia', 'Africa', '', 2);
+(17, 'Which is the largest continent by land area?', 'Geography', 'Asia', 'North America', 'South America', 'Africa', '', 2);
+(18, 'Which continent is almost entirely covered by an ice sheet?', 'Geography', 'Antarctican', 'North America', 'Greenland', 'Europe', '', 2);
+(19, 'Which continent is the Amazon rainforest primarily located in?', 'Geography', 'South America', 'Africa', 'Asia', 'Europe', '', 2);
+(20, 'Which country is The Great Barrier Reef located off the coast of?', 'Geography', 'Australia', 'Fiji', 'Philippines', 'Indonesia', '', 2);
 
 INSERT INTO games (game_id, name, subject, resource_url) VALUES
 (1, 'World Capitals Challenge', 'Geography', 'https://example.com/resources/capitals'),
