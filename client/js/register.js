@@ -21,7 +21,7 @@ document.getElementById("register-form").addEventListener("submit", async (e) =>
   
     if (response.status === 201) {
       alert("Registration successful! You can now log in.");
-      window.location.assign("login.html");
+      window.location.assign("../html/login.html");
     } else {
       alert(data.error || "Registration failed.");
     }
