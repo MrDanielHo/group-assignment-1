@@ -32,4 +32,7 @@ class Question {
       }
       return new Question(response.rows[0]);
     }
+
 }
+
+module.exports = Question;
