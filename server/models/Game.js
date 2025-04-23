@@ -38,27 +38,6 @@ class Game {
         return response.rows;
     }
 
-    static async getTopUserScores() {
-        const response = await db.query("SELECT * FROM users WHERE isAdmin = FALSE ORDER BY score LIMIT 5;");
-
-        if (response.rows.length === 0) {
-            throw new Error("No user scores found.");
-        }
-        return response.rows.map(u => new User(u));
-    }
-
-    static async updateUserScoreById(data) {
-        // First retrieve the user whose score is being updated using their id from the (request) data object
-        const updatedUser = await User.getOneById(data.id);
-
-        const response = await db.query("UPDATE users SET score = $1 WHERE id = $2 RETURNING id, score;", [updatedUser.score + parseInt(data.score), data.id]);
-
-        if (response.rows.length != 1) {
-            throw new Error("Unable to update User score.");
-        }
-        return new User(response.rows[0]);
-    }
-
     static async getAllQuestionsByGame(gameId) {
         const response = await db.query("SELECT * FROM questions WHERE game_id = $1", [gameId]);
 
