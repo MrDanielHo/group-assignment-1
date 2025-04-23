@@ -6,7 +6,10 @@
     "dev": "nodemon -L ./index.js",
     "start": "node ./index.js",
     "setup-db": "node ./database/setup.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --watchAll --detectOpenHandles --runInBand --verbose",
+    "unitTests": "jest --testPathPattern=/unit/ --watchAll --verbose",
+    "integrationTests": "jest --testPathPattern=/integration/ --watchAll --detectOpenHandles --runInBand --verbose",
+    "coverage": "jest --coverage --testPathPattern=/unit/"
   },
   "keywords": [],
   "author": "",
