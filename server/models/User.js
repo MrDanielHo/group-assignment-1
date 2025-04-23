@@ -29,6 +29,26 @@ class User {
     return new User(response.rows[0]);
   }
 
+  static async getTopUserScores() {
+    const response = await db.query("SELECT * FROM users WHERE isAdmin = FALSE ORDER BY score DESC LIMIT 5;");
+
+    if (response.rows.length === 0) {
+        throw new Error("No user scores found.");
+    }
+    return response.rows.map(u => new User(u));
+  }
+
+  static async updateUserScoreById(data) {
+    const updatedUser = await User.getOneById(data.id);
+
+    const response = await db.query("UPDATE users SET score = $1 WHERE id = $2 RETURNING id, score;", [updatedUser.score + parseInt(data.score), data.id]);
+
+    if (response.rows.length != 1) {
+        throw new Error("Unable to update User score.");
+    }
+    return new User(response.rows[0]);
+  }
+
   static async create(data) {
     const { username, password } = data;
     let response = await db.query(
