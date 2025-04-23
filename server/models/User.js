@@ -18,7 +18,7 @@ class User {
     if (response.rows.length != 1) {
       throw new Error("Unable to locate user.");
     }
-    return new User(response.rows[0]);
+    return response.rows[0];
   }
 
    // Method to find user by email (for login)
