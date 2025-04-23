@@ -1,4 +1,5 @@
 const game = require("../models/Game");
+const Question = require("../models/Question");
 
 async function getAllGames(req, res) {
   try {
@@ -19,7 +20,22 @@ async function getAllQuestionsByGame(req, res) {
   }
 }
 
+async function checkAnswer(req, res) {
+  try {
+    const { questionId, answer } = req.body;
+    const question = await Question.getOneById(questionId);
+    if (question.answer === answer) {
+      res.status(200).json({ correct: true });
+    } else {
+      res.status(200).json({ correct: false });
+    }
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+}
+
 module.exports = {
   getAllGames,
   getAllQuestionsByGame,
+  checkAnswer,
 };
