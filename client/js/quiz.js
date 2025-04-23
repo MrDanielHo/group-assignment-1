@@ -7,98 +7,73 @@
 // wrong_answer_2, 
 // wrong_answer_3}
 
-function generateQuestions(GETALL) {
-  quizData = []
-  numberOfQuestions = 5
-
-  for (let i = 0; i < numberOfQuestions; i++) {
-    const j = Math.floor(Math.random() * (GETALL.length + 1));
-    
-    // Push the row from GETALL into a seperate Array
-    let array = array.push(GETALL[j])
-
-    // Get the quiz data into the structure 
-    array = array({
-      question: array.question,
-      options: [
-        array.answer, 
-        array.wrong_answer1, 
-        array.wrong_answer2, 
-        array.wrong_answer3], 
-      answer: array.answer
-    })
-    quizData.push(array)
-  }
-  return quizData
-}
-
-const quizData = [
-  {
-    question: 'What is the capital of France?',
-    options: ['Paris', 'London', 'Berlin', 'Madrid'],
-    answer: 'Paris',
-  },
-  {
-    question: 'What is the largest planet in our solar system?',
-    options: ['Mars', 'Saturn', 'Jupiter', 'Neptune'],
-    answer: 'Jupiter',
-  },
-  {
-    question: 'Which country won the FIFA World Cup in 2018?',
-    options: ['Brazil', 'Germany', 'France', 'Argentina'],
-    answer: 'France',
-  },
-  {
-    question: 'What is the tallest mountain in the world?',
-    options: ['Mount Everest', 'K2', 'Kangchenjunga', 'Makalu'],
-    answer: 'Mount Everest',
-  },
-  {
-    question: 'Which is the largest ocean on Earth?',
-    options: [
-      'Pacific Ocean',
-      'Indian Ocean',
-      'Atlantic Ocean',
-      'Arctic Ocean',
-    ],
-    answer: 'Pacific Ocean',
-  },
-  {
-    question: 'What is the chemical symbol for gold?',
-    options: ['Au', 'Ag', 'Cu', 'Fe'],
-    answer: 'Au',
-  },
-  {
-    question: 'Who painted the Mona Lisa?',
-    options: [
-      'Pablo Picasso',
-      'Vincent van Gogh',
-      'Leonardo da Vinci',
-      'Michelangelo',
-    ],
-    answer: 'Leonardo da Vinci',
-  },
-  {
-    question: 'Which planet is known as the Red Planet?',
-    options: ['Mars', 'Venus', 'Mercury', 'Uranus'],
-    answer: 'Mars',
-  },
-  {
-    question: 'What is the largest species of shark?',
-    options: [
-      'Great White Shark',
-      'Whale Shark',
-      'Tiger Shark',
-      'Hammerhead Shark',
-    ],
-    answer: 'Whale Shark',
-  },
-  {
-    question: 'Which animal is known as the King of the Jungle?',
-    options: ['Lion', 'Tiger', 'Elephant', 'Giraffe'],
-    answer: 'Lion',
-  },
-];
+// const quizData = [
+//   {
+//     question: 'What is the capital of France?',
+//     options: ['Paris', 'London', 'Berlin', 'Madrid'],
+//     answer: 'Paris',
+//   },
+//   {
+//     question: 'What is the largest planet in our solar system?',
+//     options: ['Mars', 'Saturn', 'Jupiter', 'Neptune'],
+//     answer: 'Jupiter',
+//   },
+//   {
+//     question: 'Which country won the FIFA World Cup in 2018?',
+//     options: ['Brazil', 'Germany', 'France', 'Argentina'],
+//     answer: 'France',
+//   },
+//   {
+//     question: 'What is the tallest mountain in the world?',
+//     options: ['Mount Everest', 'K2', 'Kangchenjunga', 'Makalu'],
+//     answer: 'Mount Everest',
+//   },
+//   {
+//     question: 'Which is the largest ocean on Earth?',
+//     options: [
+//       'Pacific Ocean',
+//       'Indian Ocean',
+//       'Atlantic Ocean',
+//       'Arctic Ocean',
+//     ],
+//     answer: 'Pacific Ocean',
+//   },
+//   {
+//     question: 'What is the chemical symbol for gold?',
+//     options: ['Au', 'Ag', 'Cu', 'Fe'],
+//     answer: 'Au',
+//   },
+//   {
+//     question: 'Who painted the Mona Lisa?',
+//     options: [
+//       'Pablo Picasso',
+//       'Vincent van Gogh',
+//       'Leonardo da Vinci',
+//       'Michelangelo',
+//     ],
+//     answer: 'Leonardo da Vinci',
+//   },
+//   {
+//     question: 'Which planet is known as the Red Planet?',
+//     options: ['Mars', 'Venus', 'Mercury', 'Uranus'],
+//     answer: 'Mars',
+//   },
+//   {
+//     question: 'What is the largest species of shark?',
+//     options: [
+//       'Great White Shark',
+//       'Whale Shark',
+//       'Tiger Shark',
+//       'Hammerhead Shark',
+//     ],
+//     answer: 'Whale Shark',
+//   },
+//   {
+//     question: 'Which animal is known as the King of the Jungle?',
+//     options: ['Lion', 'Tiger', 'Elephant', 'Giraffe'],
+//     answer: 'Lion',
+//   },
+// ];
   
 const quizContainer = document.getElementById('quiz');
 const resultContainer = document.getElementById('result');
@@ -109,6 +84,33 @@ const showAnswerButton = document.getElementById('showAnswer');
 let currentQuestion = 0;
 let score = 0;
 let incorrectAnswers = [];
+let quizData = generateQuestions();
+
+async function generateQuestions() {
+  const response = await fetch("http://localhost:3000/games/1");
+  const database = await response.json();
+
+  quizArray = []
+  numberOfQuestions = 5
+  
+  for (let i = 0; i < numberOfQuestions; i++) {
+    const j = Math.floor(Math.random() * (database.length + 1));
+    
+    // Get the quiz data into the structure 
+    let array = ({
+      question: database[j]['question'],
+      options: [
+        database[j]['answer'], 
+        database[j]['wrong_answer_1'], 
+        database[j]['wrong_answer_2'], 
+        database[j]['wrong_answer_3']], 
+      answer: database[j]['answer']
+    })
+    console.log(array);
+    quizArray.push(array)
+  }
+  return quizArray
+}
 
 function shuffleAnswers(array) {
   for (let i = array.length - 1; i > 0; i--) {
