@@ -23,7 +23,7 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
       localStorage.setItem("token", data.token);
   
       alert("Login successful!");
-      window.location.assign("leaderboard.html"); 
+      window.location.assign("../html/leaderboard.html"); 
     } else {
       alert(data.error || "Login failed.");
     }
