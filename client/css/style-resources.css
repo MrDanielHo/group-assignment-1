@@ -1,0 +1,155 @@
+/* nav bar */
+.nav-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #4b0082;
+    padding: 10px 20px;
+  }
+
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    color: azure;
+  }
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f7f7f7;
+}
+
+header {
+    background: #ddd;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.top-bar {
+    display: flex;
+    background: #bce3e6;
+    padding: 10px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sidebar {
+    width: 40px;
+    height: 40px;
+    background: #bce3e6;
+}
+
+.label-buttons {
+    display: flex;
+    gap: 5px;
+}
+
+.label-buttons button {
+    background: #d7f0f0;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.label-buttons .active {
+    background: #444;
+    color: white;
+}
+
+.profile img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.container {
+    display: flex;
+    padding: 20px;
+}
+
+.left {
+    flex: 2;
+}
+
+.map {
+    background: #6dcff6;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #000;
+}
+
+.right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-left: 20px;
+}
+
+.box {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #000;
+    border-radius: 8px;
+    cursor: pointer;  /* Make the box clickable */
+    transition: background-color 0.3s ease;  /* Smooth transition effect */
+}
+
+.box:hover {
+    background-color: #ddd; /* Hover effect */
+}
+
+.subject {
+    background: #fbb4b4;
+}
+
+.quiz {
+    background: #f23ca7;
+}
+
+.progress {
+    background: #ffd93b;
+}
+
+footer {
+    background: #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Resource container for the list of URLs */
+#resource-container {
+    display: none;  /* Hidden by default */
+    margin-top: 20px;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.resource-item {
+    padding: 8px;
+    border-bottom: 1px solid #ccc;
+}
+
+.resource-item a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.resource-item a:hover {
+    text-decoration: underline;
+}
+
+/* Optional: Add transition for the resources container for smooth reveal */
+#resource-container {
+    transition: all 0.3s ease;
+}
