@@ -10,19 +10,24 @@
 function generateQuestions(GETALL) {
   quizData = []
   numberOfQuestions = 5
+
   for (let i = 0; i < numberOfQuestions; i++) {
     const j = Math.floor(Math.random() * (GETALL.length + 1));
-    GETALL.id.[j] // remove the id from the original get all request
-    quizData.pop(j)
-    ({
-      question: GETALL.question[j],
+    
+    // Push the row from GETALL into a seperate Array
+    let array = array.push(GETALL[j])
+
+    // Get the quiz data into the structure 
+    array = array({
+      question: array.question,
       options: [
-        GETALL.answer, 
-        GETALL.wrong_answer1, 
-        GETALL.wrong_answer2, 
-        GETALL.wrong_answer3], 
-      answer: GETALL.answer
+        array.answer, 
+        array.wrong_answer1, 
+        array.wrong_answer2, 
+        array.wrong_answer3], 
+      answer: array.answer
     })
+    quizData.push(array)
   }
   return quizData
 }
