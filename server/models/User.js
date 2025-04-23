@@ -10,11 +10,9 @@ class User {
     this.score = score;     // default to 0
   }
 
+  // Method to find user their id (for user scores)
   static async getOneById(id) {
-    const response = await db.query(
-      "SELECT * FROM users WHERE id = $1",
-      [id]
-    );
+    const response = await db.query("SELECT * FROM users WHERE id = $1", [id]);
     if (response.rows.length != 1) {
       throw new Error("Unable to locate user.");
     }
