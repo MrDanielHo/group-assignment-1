@@ -1,32 +1,34 @@
 const db = require("../database/connect");
 
 class User {
-  constructor({ user_id, username, password }) {
-    this.id = user_id;
-    this.username = username;
+  constructor(id, name, email, password, isAdmin = false, score = 0) {
+    this.id = id;
+    this.name = name;
+    this.email = email;
     this.password = password;
+    this.isAdmin = isAdmin; // default to false
+    this.score = score;     // default to 0
   }
 
-  static async getOneById(id) {
-    const response = await db.query(
-      "SELECT * FROM user_account WHERE user_id = $1",
-      [id]
-    );
-    if (response.rows.length != 1) {
-      throw new Error("Unable to locate user.");
-    }
-    return new User(response.rows[0]);
-  }
+  // static async getOneById(id) {
+  //   const response = await db.query(
+  //     "SELECT * FROM users WHERE user_id = $1",
+  //     [id]
+  //   );
+  //   if (response.rows.length != 1) {
+  //     throw new Error("Unable to locate user.");
+  //   }
+  //   return new User(response.rows[0]);
+  // }
 
-  static async getOneByUsername(username) {
-    const response = await db.query(
-      "SELECT * FROM user_account WHERE username = $1",
-      [username]
-    );
-    if (response.rows.length != 1) {
+   // Method to find user by email (for login)
+   static async getOneByEmail(email) {
+    const response = await db.query("SELECT * FROM users WHERE email = $1", [email]);
+    if (response.rows.length !== 1) {
       throw new Error("Unable to locate user.");
     }
-    return new User(response.rows[0]);
+    const u = response.rows[0];
+    return new User(u.id, u.name, u.email, u.password, u.isadmin, u.score);
   }
 
   static async getTopUserScores() {
@@ -49,16 +51,16 @@ class User {
     return new User(response.rows[0]);
   }
 
-  static async create(data) {
-    const { username, password } = data;
-    let response = await db.query(
-      "INSERT INTO user_account (username, password) VALUES ($1, $2) RETURNING user_id;",
-      [username, password]
-    );
-    const newId = response.rows[0].user_id;
-    const newUser = await User.getOneById(newId);
-    return newUser;
-  }
+// Method to create a new user (for registration)
+static async create(data) {
+  const { name, email, password } = data;
+  const response = await db.query(
+    "INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING id, name, email, password, isadmin, score;",
+    [name, email, password]
+  );
+  const u = response.rows[0];
+  return new User(u.id, u.name, u.email, u.password, u.isadmin, u.score);
+}
 }
 
 module.exports = User;

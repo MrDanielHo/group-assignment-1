@@ -5,18 +5,14 @@ const User = require("../models/User");
 
 async function register(req, res) {
   try {
-    const data = req.body;
+    const { name, email, password } = req.body;
 
-    // Generate a salt with a specific cost number
-    // The cost factor controls how much time is needed to calculate a single hash
     const salt = await bcrypt.genSalt(parseInt(process.env.BCRYPT_SALT_ROUNDS));
+    const hashedPassword = await bcrypt.hash(password, salt);
 
-    // Hash the password with the salt
-    data["password"] = await bcrypt.hash(data.password, salt);
-    console.log(data);
-    const result = await User.create(data);
+    const user = await User.create({ name, email, password: hashedPassword });
 
-    res.status(201).send(result);
+    res.status(201).send({ email: user.email });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
@@ -25,35 +21,23 @@ async function register(req, res) {
 async function login(req, res) {
   const data = req.body;
   try {
-    // Check if the user exists
-    const user = await User.getOneByUsername(data.username);
+    const user = await User.getOneByEmail(data.email);
     if (!user) {
       throw new Error("User not found");
     }
 
-    // Compare the password with the hashed password
     const match = await bcrypt.compare(data.password, user.password);
 
-    // If the password matches, create a JWT token
-    // The payload can contain any data you want to include in the token
     if (match) {
-      const payload = { username: user.username };
-      const sendToken = (err, token) => {
-        if (err) {
-          throw new Error("Error generating token");
-        }
-        res.status(200).json({
-          success: true,
-          token: token,
-        });
-      };
-
-      // Sign the token with a secret key and set an expiration time (1 hour)
+      const payload = { email: user.email };
       jwt.sign(
         payload,
         process.env.SECRET_TOKEN,
         { expiresIn: 3600 },
-        sendToken
+        (err, token) => {
+          if (err) throw new Error("Error generating token");
+          res.status(200).json({ success: true, token });
+        }
       );
     } else {
       throw new Error("User could not be authenticated");
@@ -67,3 +51,4 @@ module.exports = {
   register,
   login,
 };
+
