@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login Page</title>
-  <link rel="stylesheet" href="./assets/style-login.css" />
+  <link rel="stylesheet" href="../css/login.css" />
 </head>
 <body>
   <header>
@@ -16,12 +16,12 @@
       <div class="user-icon">
         <div class="circle">&#128100;</div> <!-- emoji icon -->
       </div>
-      <form class="login-form">
-        <input type="text" placeholder="Username" required />
-        <input type="password" placeholder="Password" required />
+      <form class="login-form" id="login-form">
+        <input type="email" name="email" placeholder="Email" required />
+        <input type="password" name="password" placeholder="Password" required />
         <div class="buttons">
           <button type="submit">Sign in</button>
-          <button type="button">Register</button>
+          <button type="button" onclick="window.location.href='./register.html'">Register</button>
         </div>
       </form>
     </div>
@@ -30,6 +30,8 @@
   <footer>
     <p>footer</p>
   </footer>
+  <script src="../css/login.js"></script>
 </body>
 </html>
+
 
