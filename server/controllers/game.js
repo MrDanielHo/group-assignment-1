@@ -1,9 +1,10 @@
-const game = require("../models/Game");
+const Game = require("../models/Game");
 const Question = require("../models/Question");
 
 async function getAllGames(req, res) {
   try {
-    const games = await game.getAllGames();
+    const games = await Game.getAllGames();
+    // console.log(games[0]);
     res.status(200).json(games);
   } catch (err) {
     res.status(400).json({ error: err.message });
@@ -13,10 +14,19 @@ async function getAllGames(req, res) {
 async function getAllQuestionsByGame(req, res) {
   try {
     const gameId = req.params.gameId;
-    const questions = await game.getAllQuestionsByGame(gameId);
+    const questions = await Game.getAllQuestionsByGame(gameId);
     res.status(200).json(questions);
   } catch (err) {
     res.status(400).json({ error: err.message });
+  }
+}
+
+async function getAllResources(req, res) {
+  try {
+      const resourceLinksArr = await Game.getAllResourceUrls();
+      res.status(200).json(resourceLinksArr);
+  } catch (err) {
+      res.status(400).json({ error: err.message });
   }
 }
 
@@ -37,5 +47,6 @@ async function checkAnswer(req, res) {
 module.exports = {
   getAllGames,
   getAllQuestionsByGame,
+  getAllResources,
   checkAnswer,
 };
