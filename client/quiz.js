@@ -1,3 +1,32 @@
+// The object we get from the controller is:
+// {id, 
+// question, 
+// subject, 
+// answer, 
+// wrong_answer_1, 
+// wrong_answer_2, 
+// wrong_answer_3}
+
+function generateQuestions(GETALL) {
+  quizData = []
+  numberOfQuestions = 5
+  for (let i = 0; i < numberOfQuestions; i++) {
+    const j = Math.floor(Math.random() * (GETALL.length + 1));
+    GETALL.id.[j] // remove the id from the original get all request
+    quizData.pop(j)
+    ({
+      question: GETALL.question[j],
+      options: [
+        GETALL.answer, 
+        GETALL.wrong_answer1, 
+        GETALL.wrong_answer2, 
+        GETALL.wrong_answer3], 
+      answer: GETALL.answer
+    })
+  }
+  return quizData
+}
+
 const quizData = [
   {
     question: 'What is the capital of France?',
@@ -76,7 +105,7 @@ let currentQuestion = 0;
 let score = 0;
 let incorrectAnswers = [];
 
-function shuffleArray(array) {
+function shuffleAnswers(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
@@ -94,7 +123,7 @@ function displayQuestion() {
   optionsElement.className = 'options';
 
   const shuffledOptions = [...questionData.options];
-  shuffleArray(shuffledOptions);
+  shuffleAnswers(shuffledOptions);
 
   for (let i = 0; i < shuffledOptions.length; i++) {
     const option = document.createElement('label');
