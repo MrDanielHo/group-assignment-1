@@ -1,74 +1,183 @@
-/* nav bar */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap');
+
+:root {
+    --accent-color: #8672FF;
+    --base-color: white;
+    --text-color: #2E2B41;
+    --input-color: #F3F0FF;
+    --error-color: #f06272;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--input-color);
+    color: var(--text-color);
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
 .nav-bar {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    background-color: #4b0082;
+    align-items: center;
+    background-color: var(--accent-color);
     padding: 10px 20px;
-  }
-
-  .nav-links {
+    color: var(--base-color);
+    font-weight: 600;
+    box-shadow: var(--shadow);
     list-style: none;
+}
+
+.side-logo {
+    font-size: 1.5rem;  /* font size for logo */
+}
+
+.nav-links {
     display: flex;
+    list-style: none;
     gap: 20px;
-    color: azure;
-  }
+}
 
-  /* table */
-  #container {
-    width: 600px;
-    height: auto;
-  }
-  
-  .row {
-    position: relative;
-    display: block;
-    width: 100%;
-    height: 40px;
-    border-bottom: 1px solid #AFAFAF;
-  }
-  
-  .name {
-    position: relative;
-    display: inline-block;
-    width: 75%;
-    line-height: 45px;
-  }
-  
-  .score {
-    position: relative;
-    display: inline-block;
-    width: 25%;
-  }
-  
-  .row:nth-child(1) {
-    background: gold;
-  }
-  .row:nth-child(2) {
-    background: #c0c0c0;
-  }
-  
-  .row:nth-child(3) {
-    background: #cd7f32;
-  }  
+.nav-links a {
+  text-decoration: none;       /* Removes bullets from list */
+  color: white;               
+  font-weight: 600;
+}
 
-  /* Header row styling */
+.nav-links a:hover {
+  opacity: 0.8;
+}
 
-  .header-row {
+.nav-links li {
+    cursor: pointer;
+}
+
+.profile-dropdown {
+    cursor: pointer;
+}
+
+.main-content {
+    flex-grow: 1; /* Takes all available space */
+    padding: 40px 20px;
+    max-width: 700px;
+    margin: auto; /* Центрування */
+    text-align: center; /* сenters text inside */
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    color: var(--accent-color);
+    font-weight: 800;
+}
+
+.header-row {
     display: flex;
-    width: 600px; /* Match the container width */
-    height: 40px;
-    border-bottom: 1px solid #AFAFAF;
-  }
+    justify-content: space-between; /* Розміщення по краях */
+    background-color: var(--accent-color);
+    color: var(--base-color);
+    padding: 10px 20px;
+    border-radius: 10px 10px 0 0;
+    font-weight: 600;
+}
 
-  .name-header {
-    width: 75%; /* Match the width of .name */
-    line-height: 45px; /* Match the line-height of .name */
-    font-weight: bold;
-  }
+#container .row {
+    display: flex;
+    justify-content: space-between; /* Space between items/Розміщення по краях */
+    padding: 12px 20px;
+    background-color: var(--base-color);
+    border-bottom: 1px solid #ddd;
+}
 
-  .score-header {
-    width: 25%; 
-    line-height: 45px;
-    font-weight: bold;
-  }
+#container .row:nth-child(even) {
+    background-color: #f7f7ff;  /* background for even rows  */
+}
+
+.name, .score, .name-header, .score-header {
+    width: 50%;  /* Each takes half width /Кожна половина займає 50% ширини */
+    text-align: left;
+}
+
+.score, .score-header {
+  text-align: right;          /* Align text to the right */
+}
+
+aside.treasure {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: var(--accent-color);
+    color: var(--base-color);
+    border-radius: 10px;
+    font-weight: 600;
+    box-shadow: var(--shadow);
+}
+
+/* Dropdown menu */
+
+.profile-dropdown {
+  position: relative;
+  display: inline-block;  /* Keeps in-line layout/Відображення в одному рядку */
+}
+
+#profile-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+#dropdown-menu {
+  position: absolute;
+  right: 0; /* Align to the right/Прив'язка до правого краю */
+  margin-top: 10px;
+  background-color: white;
+  border: 1px solid #ccc; 
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.1); 
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  z-index: 10;  /* On top of other elements */
+}
+
+#dropdown-menu button {
+  background: var(--accent-color);
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+#dropdown-menu button:hover {
+  background: var(--text-color);
+}
+
+.hidden {
+  display: none;  /* hide element */
+}
+
+#dropdown-menu {
+  opacity: 0;
+  transform: translateY(-10px); /* Slightly moved upward */
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+}
+
+#dropdown-menu:not(.hidden) {
+  opacity: 1; /* Fully visible  */
+  transform: translateY(0); 
+}
