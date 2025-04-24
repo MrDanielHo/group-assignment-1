@@ -3,6 +3,25 @@ const jwt = require("jsonwebtoken");
 
 const User = require("../models/User");
 
+async function getAllUsers(req, res) {
+  try {
+    const users = await User.getAll();
+    res.status(200).json(users);
+  } catch (err) {
+    res.status(404).json({ error: err.message });
+  }
+}
+
+async function getUserById(req, res) {
+  try {
+    const userId = req.params.id;
+    const user = await User.getOneById(userId);
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(404).json({ error: err.message });
+  }
+}
+
 async function register(req, res) {
   try {
     const { name, email, password } = req.body;
@@ -80,6 +99,8 @@ module.exports = {
   login,
   getTopScores,
   getUserScore,
-  updateUserScore
+  updateUserScore,
+  getAllUsers,
+  getUserById,
 };
 
