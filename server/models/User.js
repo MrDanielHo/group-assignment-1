@@ -6,19 +6,17 @@ class User {
     this.name = name;
     this.email = email;
     this.password = password;
-    this.isAdmin = isAdmin; // default to false
-    this.score = score;     // default to 0
+    this.isAdmin = isAdmin; // default to false - Rule enforced by dattabase
+    this.score = score;     // default to 0 - Rule enforced by dattabase
   }
 
+  // Method to find user their id (for user scores)
   static async getOneById(id) {
-    const response = await db.query(
-      "SELECT * FROM users WHERE id = $1",
-      [id]
-    );
+    const response = await db.query("SELECT * FROM users WHERE id = $1", [id]);
     if (response.rows.length != 1) {
       throw new Error("Unable to locate user.");
     }
-    return new User(response.rows[0]);
+    return response.rows[0];
   }
 
    // Method to find user by email (for login)
@@ -41,16 +39,13 @@ class User {
   }
 
   static async updateUserScoreById(data) {
-    // const updatedUser = await User.getOneById(data.id);
-    const updatedUser = await User.getOneById(data);
-    // const updatedUser = await User.getOneById(parseInt(data));
-
-    const response = await db.query("UPDATE users SET score = $1 WHERE id = $2 RETURNING id, score;", [updatedUser.score + parseInt(data.score), data.id]);
+    const updatedUser = await User.getOneById(data.id);
+    const response = await db.query("UPDATE users SET score = $1 WHERE id = $2 RETURNING id, score;", [updatedUser.score + parseInt(data.score), parseInt(data.id)]);
 
     if (response.rows.length != 1) {
         throw new Error("Unable to update User score.");
     }
-    return new User(response.rows[0]);
+    return response.rows[0];
   }
 
 // Method to create a new user (for registration)
