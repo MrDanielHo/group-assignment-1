@@ -4,7 +4,12 @@ const userController = require("../controllers/user.js");
 
 const userRouter = Router();
 
+userRouter.get("/", userController.getAllUsers);
+userRouter.get("/leaderboard", userController.getTopScores);
+userRouter.get("/score/:id", userController.getUserScore);
+userRouter.get("/:id", userController.getUserById);
 userRouter.post("/register", userController.register);
 userRouter.post("/login", userController.login);
+userRouter.patch("/score/:id", userController.updateUserScore);
 
 module.exports = userRouter;

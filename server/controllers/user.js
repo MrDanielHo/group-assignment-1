@@ -3,6 +3,25 @@ const jwt = require("jsonwebtoken");
 
 const User = require("../models/User");
 
+async function getAllUsers(req, res) {
+  try {
+    const users = await User.getAll();
+    res.status(200).json(users);
+  } catch (err) {
+    res.status(404).json({ error: err.message });
+  }
+}
+
+async function getUserById(req, res) {
+  try {
+    const userId = req.params.id;
+    const user = await User.getOneById(userId);
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(404).json({ error: err.message });
+  }
+}
+
 async function register(req, res) {
   try {
     const { name, email, password } = req.body;
@@ -47,8 +66,41 @@ async function login(req, res) {
   }
 }
 
+async function getTopScores(req, res) {
+  try {
+    const topScores = await User.getTopUserScores();
+    res.status(200).json(topScores);
+  } catch (err) {
+    res.status(404).json({ "error": err.message })
+  }
+}
+
+async function getUserScore(req, res) {
+  try {
+    const userId = req.params.id;
+    const user = await User.getOneById(userId);
+    res.status(200).json(user.score); // Returns an integer score
+  } catch (err) {
+    res.status(404).json({ "error": err.message })
+  }
+}
+
+async function updateUserScore(req, res) {
+  try {
+    const user = await User.updateUserScoreById(req.body);
+    res.status(200).json(user); // Returns an object containing a user's id and updated score
+  } catch (err) {
+    res.status(404).json({ "error": err.message })
+  }
+}
+
 module.exports = {
   register,
   login,
+  getTopScores,
+  getUserScore,
+  updateUserScore,
+  getAllUsers,
+  getUserById,
 };
 
