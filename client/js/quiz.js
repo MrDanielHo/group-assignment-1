@@ -114,6 +114,11 @@ function displayResult() {
   submitButton.style.display = "none";
   retryButton.style.display = "inline-block";
   showAnswerButton.style.display = "inline-block";
+    
+  // Show congratulatory message instead of hiding the question box
+  questionElement.innerText = "Well Done!";
+  questionElement.style.display = "block";
+
   resultContainer.innerHTML = `You scored ${score} out of ${quizData.length}!`;
 }
 
@@ -126,6 +131,7 @@ function showAnswer() {
   submitButton.style.display = "none";
   retryButton.style.display = "inline-block";
   showAnswerButton.style.display = "none";
+
 
   let html = `<p>You scored ${score} out of ${quizData.length}!</p>`;
   html += `<h3>Review Incorrect Answers:</h3>`;

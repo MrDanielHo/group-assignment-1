@@ -15,14 +15,14 @@ resourcesBox.addEventListener('click', () => {
         return response.json();
       })
       .then(resources => {
-
+        console.log("Fetched resources:", resources);
         if (resources.length === 0) {
           resourceContainer.innerHTML = '<p>No resources available at the moment.</p>';
         } else {
 
-          const resourceList = resources.map(resource => {
-            return `<div class="resource-item"><a href="${resource.resource_url}" target="_blank">${resource.resource_url}</a></div>`;
-          }).join('');
+          const resourceList = resources.map(url => {
+            return `<div class="resource-item"><a href="${url}" target="_blank">${url}</a></div>`;
+          }).join('');          
           
 
           resourceContainer.innerHTML = resourceList;

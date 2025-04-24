@@ -179,3 +179,13 @@ aside.treasure {
 #dropdown-menu button:hover {
   background: var(--text-color);
 }
+
+footer {
+  width: 100%;
+  margin: auto;
+  padding: 0px;
+  background-color: var(--accent-color);
+  text-align: center;
+  display: block;
+  font-size:smaller;
+}

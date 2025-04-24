@@ -1,7 +1,7 @@
-// const express = require('express');
-// const router = express.Router();
-// const gamesController = require('../controllers/resources');
+const express = require('express');
+const router = express.Router();
+const gamesController = require('../controllers/resources');
 
-// router.get('/resources', gamesController.getResources);
+router.get('/resources', gamesController.getResources);
 
-// module.exports = router;
+module.exports = router;
