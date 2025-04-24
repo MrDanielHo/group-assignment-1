@@ -1,3 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap');
+
+:root {
+    --accent-color: #8672FF;
+    --base-color: white;
+    --text-color: #2E2B41;
+    --input-color: #F3F0FF;
+    --error-color: #f06272;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+html {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--input-color);
+  color: var(--text-color);
+}
+
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--accent-color);
+  padding: 10px 20px;
+  color: var(--base-color);
+  font-weight: 600;
+  box-shadow: var(--shadow);
+  list-style: none;
+}
+
+.side-logo {
+  font-size: 1.5rem;  /* font size for logo */
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+}
+
+.nav-links a {
+text-decoration: none;       /* Removes bullets from list */
+color: white;               
+font-weight: 600;
+}
+
+.nav-links a:hover {
+opacity: 0.8;
+}
+
+.nav-links li {
+  cursor: pointer;
+}
+
+.profile-dropdown {
+  cursor: pointer;
+}
+
 body {
     background-image: url("../images/63698569_9499572.jpg");
     background-size: cover;
@@ -38,36 +95,73 @@ body {
     overflow-wrap: break-word;
   }
   
-.nav-bar {
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    width: 98%;
-    justify-content: space-between;
-    background-color: #458be7;
-    padding: 10px 20px;
-  }
 
-  .navbar a {
-    float: left;
-    display: block;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
+  profile-dropdown {
+    position: relative;
+    display: inline-block;  /* Keeps in-line layout/Відображення в одному рядку */
   }
   
-  .navbar a:hover {
-    background: #ddd;
-    color: black;
+  #profile-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
   }
+  
+/* Dropdown menu container */
+.profile-dropdown {
+  position: relative;
+  display: inline-block;
+}
 
-  .nav-links {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-    color: azure;
-  }
+#profile-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* stages dropdown меню */
+#dropdown-menu {
+  position: absolute;
+  right: 0;
+  margin-top: 10px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+
+  /* hidden by default */
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* when we add the class 'show' — display the menu*/
+#dropdown-menu.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+#dropdown-menu button {
+  background: var(--accent-color);
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+#dropdown-menu button:hover {
+  background: var(--text-color);
+}

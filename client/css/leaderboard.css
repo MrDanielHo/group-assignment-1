@@ -71,7 +71,7 @@ body {
     flex-grow: 1; /* Takes all available space */
     padding: 40px 20px;
     max-width: 700px;
-    margin: auto; /* Центрування */
+    margin: auto; /* Centers */
     text-align: center; /* сenters text inside */
 }
 
@@ -84,7 +84,7 @@ h1 {
 
 .header-row {
     display: flex;
-    justify-content: space-between; /* Розміщення по краях */
+    justify-content: space-between; /* Space between items */
     background-color: var(--accent-color);
     color: var(--base-color);
     padding: 10px 20px;
@@ -123,11 +123,10 @@ aside.treasure {
     box-shadow: var(--shadow);
 }
 
-/* Dropdown menu */
-
+/* Dropdown menu container */
 .profile-dropdown {
   position: relative;
-  display: inline-block;  /* Keeps in-line layout/Відображення в одному рядку */
+  display: inline-block;
 }
 
 #profile-btn {
@@ -138,18 +137,33 @@ aside.treasure {
   cursor: pointer;
 }
 
+/* stages dropdown меню */
 #dropdown-menu {
   position: absolute;
-  right: 0; /* Align to the right/Прив'язка до правого краю */
+  right: 0;
   margin-top: 10px;
   background-color: white;
-  border: 1px solid #ccc; 
+  border: 1px solid #ccc;
   border-radius: 8px;
-  box-shadow: 0px 4px 8px rgba(0,0,0,0.1); 
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   padding: 10px;
   display: flex;
   flex-direction: column;
-  z-index: 10;  /* On top of other elements */
+  z-index: 10;
+
+  /* hidden by default */
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* when we add the class 'show' — display the menu*/
+#dropdown-menu.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 #dropdown-menu button {
@@ -164,20 +178,4 @@ aside.treasure {
 
 #dropdown-menu button:hover {
   background: var(--text-color);
-}
-
-.hidden {
-  display: none;  /* hide element */
-}
-
-#dropdown-menu {
-  opacity: 0;
-  transform: translateY(-10px); /* Slightly moved upward */
-  transition: opacity 0.2s ease, transform 0.2s ease;
-  pointer-events: none;
-}
-
-#dropdown-menu:not(.hidden) {
-  opacity: 1; /* Fully visible  */
-  transform: translateY(0); 
 }

@@ -36,7 +36,7 @@ const passwordInput = document.getElementById('password-input')
 const errorMessage = document.getElementById('error-message')
 
 form.addEventListener('submit', (e) => {
-  // Викликаємо логіку валідації
+  // calling the validation logic
   let errors = getLoginFormErrors(emailInput.value, passwordInput.value)
 
   if(errors.length > 0){
@@ -61,7 +61,7 @@ function getLoginFormErrors(email, password){
   return errors
 }
 
-// очищаємо підсвічування при вводі
+// removes input highlighting when typing
 const allInputs = [emailInput, passwordInput]
 allInputs.forEach(input => {
   input.addEventListener('input', () => {

@@ -1,17 +1,109 @@
-/* nav bar */
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap');
+
+:root {
+    --accent-color: #8672FF;
+    --base-color: white;
+    --text-color: #2E2B41;
+    --input-color: #F3F0FF;
+    --error-color: #f06272;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
 .nav-bar {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    background-color: #4b0082;
+    align-items: center;
+    background-color: var(--accent-color);
     padding: 10px 20px;
-  }
-
-  .nav-links {
+    color: var(--base-color);
+    font-weight: 600;
+    box-shadow: var(--shadow);
     list-style: none;
+}
+
+.side-logo {
+    font-size: 1.5rem;  /* font size for logo */
+}
+
+.nav-links {
     display: flex;
+    list-style: none;
     gap: 20px;
-    color: azure;
+}
+
+.nav-links a {
+  text-decoration: none;       /* Removes bullets from list */
+  color: white;               
+  font-weight: 600;
+}
+
+.nav-links a:hover {
+  opacity: 0.8;
+}
+
+.nav-links li {
+    cursor: pointer;
+}
+
+.profile-dropdown {
+    cursor: pointer;
+}
+
+/* Dropdown menu container */
+.profile-dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  #profile-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+  
+  /* stages dropdown меню */
+  #dropdown-menu {
+    position: absolute;
+    right: 0;
+    margin-top: 10px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+  
+    /* hidden by default */
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+  
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+  
+  /* when we add the class 'show' — display the menu*/
+  #dropdown-menu.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  
+  #dropdown-menu button {
+    background: var(--accent-color);
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  
+  #dropdown-menu button:hover {
+    background: var(--text-color);
   }
 
 body {

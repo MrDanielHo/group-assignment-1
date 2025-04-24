@@ -10,16 +10,16 @@
     <nav class="nav-bar">
         <div class="side-logo">👩‍🏫</div>
         <ul class="nav-links">
-            <li><a href="../index.html">Home</a></li>
+            <li><a href="../html/index.html">Home</a></li>
             <li><a href="../html/resources.html">Resources</a></li>
             <li><a href="../html/quiz.html">Quiz</a></li>
         </ul>
         <div class="profile-dropdown">
             <button id="profile-btn">👤 ▼</button>
             <div id="dropdown-menu" class="hidden">
-                <button id="logout-btn">Logout</button>
+              <button id="auth-btn" type="button">Login</button> <!-- текст підставляється скриптом -->
             </div>
-        </div>        
+          </div>                
     </nav>
     
     <main class="main-content">
@@ -42,7 +42,7 @@
             <p>Treasure Trove</p>
         </aside>
     </main>
-    <script>
+    <!-- <script>
         const profileBtn = document.getElementById('profile-btn');
         const dropdownMenu = document.getElementById('dropdown-menu');
         const logoutBtn = document.getElementById('logout-btn');
@@ -65,7 +65,8 @@
             // Here or in another file will can add logic for clearing the session
             window.location.href = "index.html"; // homepage
         });
-    </script>    
+    </script>     -->
+    <script src="../js/auth.js" defer ></script>
 </body>
     
 </body>

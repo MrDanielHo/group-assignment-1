@@ -1,5 +1,5 @@
 document.getElementById("register-form").addEventListener("submit", async (e) => {
-  e.preventDefault(); // завжди зупиняємо відправку форми
+  e.preventDefault(); // prevent 
 
   const nameInput = document.getElementById('name-input');
   const emailInput = document.getElementById('email-input');
@@ -10,7 +10,7 @@ document.getElementById("register-form").addEventListener("submit", async (e) =>
   const email = emailInput.value.trim();
   const password = passwordInput.value.trim();
 
-  // Перевірка на помилки
+  // Check if there any errors
   const errors = [];
   if (name === '') {
     errors.push("Name is required");
@@ -27,10 +27,10 @@ document.getElementById("register-form").addEventListener("submit", async (e) =>
 
   if (errors.length > 0) {
     errorMessage.innerText = errors.join(". ");
-    return; // не відправляємо форму, якщо є помилки
+    return; // dont sent if errors
   }
 
-  // Відправка даних на сервер
+  // Send to the server
   const response = await fetch("http://localhost:3000/users/register", {
     method: "POST",
     headers: {
