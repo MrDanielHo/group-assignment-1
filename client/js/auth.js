@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (isLoggedInNow) {
         console.log('🔓 Logout: deleting the token and redirecting to index.html');
         localStorage.removeItem('token');
-        window.location.assign('../index.html');
+        window.location.assign('../html/index.html');
       } else {
         console.log('🔐 Login: redirecting to login.html');
         window.location.assign('../html/login.html');
