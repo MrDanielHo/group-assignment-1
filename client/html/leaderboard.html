@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/leaderboard.css">
+    <script src="../js/leaderboard.js" defer></script>
     <title>Leaderboard</title>
 </head>
 <body>
@@ -31,21 +32,18 @@
         </div>
 
         <div id="container">
-            <div class="row"><div class="name">Player1</div><div class="score">430</div></div>
-            <div class="row"><div class="name">Player2</div><div class="score">580</div></div>
-            <div class="row"><div class="name">Player3</div><div class="score">310</div></div>
-            <div class="row"><div class="name">Player4</div><div class="score">640</div></div>
-            <div class="row"><div class="name">Player5</div><div class="score">495</div></div>
         </div>
 
         <aside class="treasure">
             <p>Treasure Trove</p>
         </aside>
     </main>
-    <!-- <script>
+    <script>
         const profileBtn = document.getElementById('profile-btn');
         const dropdownMenu = document.getElementById('dropdown-menu');
         const logoutBtn = document.getElementById('logout-btn');
+
+        const scoreRowsContainer = document.getElementById('container');
     
         // toggle dropdown visibility
         profileBtn.addEventListener('click', (e) => {
@@ -65,8 +63,7 @@
             // Here or in another file will can add logic for clearing the session
             window.location.href = "index.html"; // homepage
         });
-    </script>     -->
-    <script src="../js/auth.js" defer ></script>
+    </script>    
 </body>
     
 </body>
