@@ -17,7 +17,7 @@ class Game {
         if (response.rows.length === 0) {
             throw new Error("No games found");
         }
-        return response.rows.map(g => new Game(g));
+        return response.rows;
     }
 
     static async getAllResourceUrls() {
@@ -26,7 +26,7 @@ class Game {
         if (response.rows.length === 0) {
             throw new Error("No resources found.");
         }
-        return response.rows;
+        return response.rows.map(r => r.resource_url);
     }
 
     static async getResourceUrlBySubject(data) {

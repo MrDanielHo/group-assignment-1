@@ -1,114 +1,44 @@
-// The object we get from the controller is:
-// {id, 
-// question, 
-// subject, 
-// answer, 
-// wrong_answer_1, 
-// wrong_answer_2, 
-// wrong_answer_3}
-
-function generateQuestions(GETALL) {
-  quizData = []
-  numberOfQuestions = 5
-
-  for (let i = 0; i < numberOfQuestions; i++) {
-    const j = Math.floor(Math.random() * (GETALL.length + 1));
-    
-    // Push the row from GETALL into a seperate Array
-    let array = array.push(GETALL[j])
-
-    // Get the quiz data into the structure 
-    array = array({
-      question: array.question,
-      options: [
-        array.answer, 
-        array.wrong_answer1, 
-        array.wrong_answer2, 
-        array.wrong_answer3], 
-      answer: array.answer
-    })
-    quizData.push(array)
-  }
-  return quizData
-}
-
-const quizData = [
-  {
-    question: 'What is the capital of France?',
-    options: ['Paris', 'London', 'Berlin', 'Madrid'],
-    answer: 'Paris',
-  },
-  {
-    question: 'What is the largest planet in our solar system?',
-    options: ['Mars', 'Saturn', 'Jupiter', 'Neptune'],
-    answer: 'Jupiter',
-  },
-  {
-    question: 'Which country won the FIFA World Cup in 2018?',
-    options: ['Brazil', 'Germany', 'France', 'Argentina'],
-    answer: 'France',
-  },
-  {
-    question: 'What is the tallest mountain in the world?',
-    options: ['Mount Everest', 'K2', 'Kangchenjunga', 'Makalu'],
-    answer: 'Mount Everest',
-  },
-  {
-    question: 'Which is the largest ocean on Earth?',
-    options: [
-      'Pacific Ocean',
-      'Indian Ocean',
-      'Atlantic Ocean',
-      'Arctic Ocean',
-    ],
-    answer: 'Pacific Ocean',
-  },
-  {
-    question: 'What is the chemical symbol for gold?',
-    options: ['Au', 'Ag', 'Cu', 'Fe'],
-    answer: 'Au',
-  },
-  {
-    question: 'Who painted the Mona Lisa?',
-    options: [
-      'Pablo Picasso',
-      'Vincent van Gogh',
-      'Leonardo da Vinci',
-      'Michelangelo',
-    ],
-    answer: 'Leonardo da Vinci',
-  },
-  {
-    question: 'Which planet is known as the Red Planet?',
-    options: ['Mars', 'Venus', 'Mercury', 'Uranus'],
-    answer: 'Mars',
-  },
-  {
-    question: 'What is the largest species of shark?',
-    options: [
-      'Great White Shark',
-      'Whale Shark',
-      'Tiger Shark',
-      'Hammerhead Shark',
-    ],
-    answer: 'Whale Shark',
-  },
-  {
-    question: 'Which animal is known as the King of the Jungle?',
-    options: ['Lion', 'Tiger', 'Elephant', 'Giraffe'],
-    answer: 'Lion',
-  },
-];
-  
-const quizContainer = document.getElementById('quiz');
-const resultContainer = document.getElementById('result');
-const submitButton = document.getElementById('submit');
-const retryButton = document.getElementById('retry');
-const showAnswerButton = document.getElementById('showAnswer');
+const quizContainer = document.getElementById("quiz");
+const resultContainer = document.getElementById("result");
+const submitButton = document.getElementById("submit");
+const retryButton = document.getElementById("retry");
+const showAnswerButton = document.getElementById("showAnswer");
+const questionElement = document.getElementById("question");
+const optionsElement = document.createElement("div");
+optionsElement.id = "options";
+quizContainer.appendChild(optionsElement);
 
 let currentQuestion = 0;
 let score = 0;
 let incorrectAnswers = [];
+let quizData = [];
+
+async function generateQuestions() {
+  const response = await fetch("http://localhost:3000/games/1");
+  const database = await response.json();
+
+  const quizArray = [];
+  const numberOfQuestions = 5;
+
+  for (let i = 0; i < numberOfQuestions; i++) {
+    const j = Math.floor(Math.random() * database.length); // Fixed: don't go out of range
+
+    const options = [
+      database[j]["answer"],
+      database[j]["wrong_answer_1"],
+      database[j]["wrong_answer_2"],
+      database[j]["wrong_answer_3"]
+    ];
+    shuffleAnswers(options);
+
+    quizArray.push({
+      question: database[j]["question"],
+      options: options,
+      answer: database[j]["answer"]
+    });
+  }
+  return quizArray;
+}
 
 function shuffleAnswers(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -117,109 +47,104 @@ function shuffleAnswers(array) {
   }
 }
 
-function displayQuestion() {
+async function displayQuestion() {
+  if (!quizData || quizData.length === 0) return;
+
   const questionData = quizData[currentQuestion];
 
-  const questionElement = document.createElement('div');
-  questionElement.className = 'question';
-  questionElement.innerHTML = questionData.question;
+  questionElement.innerText = questionData.question;
+  optionsElement.innerHTML = "";
 
-  const optionsElement = document.createElement('div');
-  optionsElement.className = 'options';
+  questionData.options.forEach((option, index) => {
+    const optionElement = document.createElement("div");
+    const optionId = `option-${index}`;
+    optionElement.innerHTML = `
+      <input type="radio" name="quiz" value="${option}" id="${optionId}">
+      <label for="${optionId}">${option}</label>
+    `;
+    optionsElement.appendChild(optionElement);
+  });
+}
 
-  const shuffledOptions = [...questionData.options];
-  shuffleAnswers(shuffledOptions);
+async function initializeQuiz() {
+  quizData = await generateQuestions();
+  currentQuestion = 0;
+  score = 0;
+  incorrectAnswers = [];
 
-  for (let i = 0; i < shuffledOptions.length; i++) {
-    const option = document.createElement('label');
-    option.className = 'option';
+  quizContainer.style.display = "block";
+  submitButton.style.display = "inline-block";
+  retryButton.style.display = "none";
+  showAnswerButton.style.display = "none";
+  resultContainer.innerHTML = "";
 
-    const radio = document.createElement('input');
-    radio.type = 'radio';
-    radio.name = 'quiz';
-    radio.value = shuffledOptions[i];
-
-    const optionText = document.createTextNode(shuffledOptions[i]);
-
-    option.appendChild(radio);
-    option.appendChild(optionText);
-    optionsElement.appendChild(option);
-  }
-
-  quizContainer.innerHTML = '';
-  quizContainer.appendChild(questionElement);
-  quizContainer.appendChild(optionsElement);
+  displayQuestion();
 }
 
 function checkAnswer() {
   const selectedOption = document.querySelector('input[name="quiz"]:checked');
   if (selectedOption) {
     const answer = selectedOption.value;
-    if (answer === quizData[currentQuestion].answer) {
+    const correct = quizData[currentQuestion].answer;
+
+    if (answer === correct) {
       score++;
     } else {
       incorrectAnswers.push({
         question: quizData[currentQuestion].question,
         incorrectAnswer: answer,
-        correctAnswer: quizData[currentQuestion].answer,
+        correctAnswer: correct
       });
     }
+
     currentQuestion++;
-    selectedOption.checked = false;
+
     if (currentQuestion < quizData.length) {
       displayQuestion();
     } else {
       displayResult();
     }
+  } else {
+    alert("Please select an answer.");
   }
 }
 
 function displayResult() {
-  quizContainer.style.display = 'none';
-  submitButton.style.display = 'none';
-  retryButton.style.display = 'inline-block';
-  showAnswerButton.style.display = 'inline-block';
+  quizContainer.style.display = "none";
+  submitButton.style.display = "none";
+  retryButton.style.display = "inline-block";
+  showAnswerButton.style.display = "inline-block";
   resultContainer.innerHTML = `You scored ${score} out of ${quizData.length}!`;
 }
 
 function retryQuiz() {
-  currentQuestion = 0;
-  score = 0;
-  incorrectAnswers = [];
-  quizContainer.style.display = 'block';
-  submitButton.style.display = 'inline-block';
-  retryButton.style.display = 'none';
-  showAnswerButton.style.display = 'none';
-  resultContainer.innerHTML = '';
-  displayQuestion();
+  initializeQuiz();
 }
 
 function showAnswer() {
-  quizContainer.style.display = 'none';
-  submitButton.style.display = 'none';
-  retryButton.style.display = 'inline-block';
-  showAnswerButton.style.display = 'none';
+  quizContainer.style.display = "none";
+  submitButton.style.display = "none";
+  retryButton.style.display = "inline-block";
+  showAnswerButton.style.display = "none";
 
-  let incorrectAnswersHtml = '';
-  for (let i = 0; i < incorrectAnswers.length; i++) {
-    incorrectAnswersHtml += `
+  let html = `<p>You scored ${score} out of ${quizData.length}!</p>`;
+  html += `<h3>Review Incorrect Answers:</h3>`;
+  incorrectAnswers.forEach((item) => {
+    html += `
       <p>
-        <strong>Question:</strong> ${incorrectAnswers[i].question}<br>
-        <strong>Your Answer:</strong> ${incorrectAnswers[i].incorrectAnswer}<br>
-        <strong>Correct Answer:</strong> ${incorrectAnswers[i].correctAnswer}
-      </p>
-    `;
-  }
+        <strong>Q:</strong> ${item.question}<br>
+        <strong>Your Answer:</strong> ${item.incorrectAnswer}<br>
+        <strong>Correct Answer:</strong> ${item.correctAnswer}
+      </p>`;
+  });
 
-  resultContainer.innerHTML = `
-    <p>You scored ${score} out of ${quizData.length}!</p>
-    <p>Incorrect Answers:</p>
-    ${incorrectAnswersHtml}
-  `;
+  resultContainer.innerHTML = html;
 }
 
-submitButton.addEventListener('click', checkAnswer);
-retryButton.addEventListener('click', retryQuiz);
-showAnswerButton.addEventListener('click', showAnswer);
+// Event Listeners
+submitButton.addEventListener("click", checkAnswer);
+retryButton.addEventListener("click", retryQuiz);
+showAnswerButton.addEventListener("click", showAnswer);
 
-displayQuestion();
+// Start the game
+initializeQuiz();

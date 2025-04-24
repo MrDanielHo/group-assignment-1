@@ -10,16 +10,16 @@ class User {
     this.score = score;     // default to 0
   }
 
-  // static async getOneById(id) {
-  //   const response = await db.query(
-  //     "SELECT * FROM users WHERE user_id = $1",
-  //     [id]
-  //   );
-  //   if (response.rows.length != 1) {
-  //     throw new Error("Unable to locate user.");
-  //   }
-  //   return new User(response.rows[0]);
-  // }
+  static async getOneById(id) {
+    const response = await db.query(
+      "SELECT * FROM users WHERE id = $1",
+      [id]
+    );
+    if (response.rows.length != 1) {
+      throw new Error("Unable to locate user.");
+    }
+    return new User(response.rows[0]);
+  }
 
    // Method to find user by email (for login)
    static async getOneByEmail(email) {
@@ -32,16 +32,18 @@ class User {
   }
 
   static async getTopUserScores() {
-    const response = await db.query("SELECT * FROM users WHERE isAdmin = FALSE ORDER BY score DESC LIMIT 5;");
+    const response = await db.query("SELECT name, score FROM users WHERE isAdmin = FALSE ORDER BY score DESC LIMIT 5;");
 
     if (response.rows.length === 0) {
         throw new Error("No user scores found.");
     }
-    return response.rows.map(u => new User(u));
+    return response.rows
   }
 
   static async updateUserScoreById(data) {
-    const updatedUser = await User.getOneById(data.id);
+    // const updatedUser = await User.getOneById(data.id);
+    const updatedUser = await User.getOneById(data);
+    // const updatedUser = await User.getOneById(parseInt(data));
 
     const response = await db.query("UPDATE users SET score = $1 WHERE id = $2 RETURNING id, score;", [updatedUser.score + parseInt(data.score), data.id]);
 
