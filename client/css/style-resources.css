@@ -1,4 +1,4 @@
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap');
 
 :root {
     --accent-color: #8672FF;
@@ -19,12 +19,12 @@ html {
     font-family: 'Poppins', sans-serif;
     background-color: var(--input-color);
     color: var(--text-color);
+    overflow: hidden;
 }
 
 body {
     min-height: 100vh;
     display: flex;
-    flex-direction: column;
     flex-direction: column;
     margin: 0;
 }
@@ -83,7 +83,7 @@ body {
     cursor: pointer;
   }
   
-  /* stages dropdown меню */
+  /* dropdown меню */
   #dropdown-menu {
     position: absolute;
     right: 0;
@@ -126,58 +126,40 @@ body {
     background: var(--text-color);
   }
 
+.intro-text {
+    text-align: center;
+    padding: 20px 0;
+    color: var(--text-color);
+    max-width: 800px; 
+    margin: 0 auto; /* Center the section */
+}
 
-/* .top-bar {
-    display: flex;
-    background: #bce3e6;
-    padding: 10px;
-    align-items: center;
-    justify-content: space-between;
-} */
+.intro-text h2 {
+    font-weight: normal; 
+    font-size: 1.2rem; 
+}
 
-/* .sidebar {
-    width: 40px;
-    height: 40px;
-    background: #bce3e6;
-} */
-
-/* .label-buttons {
-    display: flex;
-    gap: 5px;
-} */
-
-/* .label-buttons button {
-    background: #d7f0f0;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-} */
-
-/* .label-buttons .active {
-    background: #444;
-    color: white;
-} */
-
-/* .profile img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-} */
-
+/* Container is centered with .left and .right side by side */
 .container {
     display: flex;
+    flex-direction: row; /* .left and .right side by side */
     padding: 20px;
+    max-width: 800px; /* Limit the width for better centering */
+    margin: 0 auto; /* Center the container horizontally */
     flex: 1;
+    overflow: hidden;
+    justify-content: center; /* Ensure the content inside is centered */
 }
 
 .left {
     flex: 2;
+    height: 500px; /* Fixed height  */
+    margin-right: 20px; /* Spacing between .left and .right */
 }
 
 .map {
-    background: #6dcff6;
-    height: 500px;
+    width: 100%; /* Take full width of .left */
+    height: 100%; /* Take full height of .left */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -190,7 +172,6 @@ body {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    padding-left: 20px;
 }
 
 .box {
@@ -201,7 +182,7 @@ body {
     font-weight: bold;
     color: #000;
     border-radius: 8px;
-    cursor: pointer;  /* Make the box clickable */
+    cursor: pointer; 
     transition: background-color 0.3s ease;  /* Smooth transition effect */
 }
 
@@ -211,20 +192,6 @@ body {
 
 .subject {
     background: #fbb4b4;
-}
-
-/* .quiz {
-    background: #f23ca7;
-}
-
-.progress {
-    background: #ffd93b;
-}  */
-
-footer {
-    background: #ddd;
-    padding: 10px;
-    text-align: center;
 }
 
 /* Resource container for the list of URLs */
@@ -250,9 +217,17 @@ footer {
     text-decoration: underline;
 }
 
-/* Optional: Add transition for the resources container for smooth reveal */
+/* Transition for the resources container for smooth reveal */
 #resource-container {
     transition: all 0.3s ease;
+}
+
+.map img {
+    width: 100%; /* Adjust to fit the container */
+    height: 100%; /* Maintain aspect ratio */
+    object-fit: cover;
+    border-radius: 10px; 
+    background-size: cover;
 }
 
 footer {
@@ -263,4 +238,4 @@ footer {
     text-align: center;
     display: block;
     font-size:smaller;
-  }
+}
