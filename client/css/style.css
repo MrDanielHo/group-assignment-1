@@ -1,12 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap');
 
 :root {
-    --accent-color: #8672FF;
-    --base-color: white;
-    --text-color: #2E2B41;
-    --input-color: #F3F0FF;
-    --error-color: #f06272;
-    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --accent-color: #8672FF;
+  --base-color: white;
+  --text-color: #2E2B41;
+  --input-color: #F3F0FF;
+  --error-color: #f06272;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html {
@@ -38,13 +44,13 @@ html {
 }
 
 .nav-links a {
-text-decoration: none;       /* Removes bullets from list */
-color: white;               
-font-weight: 600;
+  text-decoration: none;       /* Removes bullets from list */
+  color: white;               
+  font-weight: 600;
 }
 
 .nav-links a:hover {
-opacity: 0.8;
+  opacity: 0.8;
 }
 
 .nav-links li {
@@ -56,58 +62,60 @@ opacity: 0.8;
 }
 
 body {
-    background-image: url("../images/63698569_9499572.jpg");
-    background-size: cover;
+  background-image: url("../images/63698569_9499572.jpg");
+  background-size: cover;
 }
-.header{
-    padding: 60px;
-    text-align: center;
-    /* color: blanchedalmond; */
-    font-size: 30px;
+
+.header {
+  padding: 60px;
+  text-align: center;
+  /* color: blanchedalmond; */
+  color: var(--text-color);
+  font-size: 30px;
 }
 
 .container {
-    display: flexbox;
-    align-items: center;
-    gap: 10px;
+  display: flexbox;
+  align-items: center;
+  gap: 10px;
 }
 
-
-.box p{
+.box p {
   text-align: center;
 }
-.box img{
-    display: flex;
-    background-size: cover;
-    border: 5px solid black;
-    margin: auto;
-    width: 40%;
-    height: 40%;
+
+.box img {
+  display: flex;
+  background-size: cover;
+  border: 5px solid black;
+  margin: auto;
+  width: 40%;
+  height: 40%;
 }
 
 .text {
-    display: inline-block;
-    font-size: 20px;
-    padding-left: 20px;
-    /* float: left; */
-    flex: 1;
-    /* width: fit-content; */
-    overflow-wrap: break-word;
-  }
+  display: inline-block;
+  font-size: 20px;
+  padding-left: 20px;
+  /* float: left; */
+  flex: 1;
+  /* width: fit-content; */
+  overflow-wrap: break-word;
+}
   
 
-  profile-dropdown {
-    position: relative;
-    display: inline-block;  /* Keeps in-line layout/Відображення в одному рядку */
-  }
+.profile-dropdown {
+  position: relative;
+  display: inline-block;  /* Keeps in-line layout/Відображення в одному рядку */
+}
   
-  #profile-btn {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.2rem;
-    cursor: pointer;
-  }
+#profile-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
   
 /* Dropdown menu container */
 .profile-dropdown {
