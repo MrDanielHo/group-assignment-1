@@ -51,8 +51,8 @@ VALUES
 INSERT INTO games (game_id, name, subject, resource_url)
 OVERRIDING SYSTEM VALUE
 VALUES
-(1, 'World Capitals Challenge', 'Geography', 'https://example.com/resources/capitals'),
-(2, 'Continents & Oceans Quiz', 'Geography', 'https://example.com/resources/continents');
+(1, 'World Capitals Challenge', 'Geography', 'https://en.wikipedia.org/wiki/List_of_national_capitals'),
+(2, 'Continents & Oceans Quiz', 'Geography', 'https://en.wikipedia.org/wiki/Ocean');
 
 INSERT INTO questions (id,
     question,

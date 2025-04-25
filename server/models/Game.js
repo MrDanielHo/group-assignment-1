@@ -1,6 +1,5 @@
 const db = require("../database/connect");
 
-const User = require("./User");
 const Question = require("./Question");
 
 class Game {
@@ -21,12 +20,12 @@ class Game {
     }
 
     static async getAllResourceUrls() {
-        const response = await db.query("SELECT resource_url FROM games;");
+        const response = await db.query("SELECT name, resource_url FROM games;");
 
         if (response.rows.length === 0) {
             throw new Error("No resources found.");
         }
-        return response.rows.map(r => r.resource_url);
+        return response.rows;
     }
 
     static async getResourceUrlBySubject(data) {
