@@ -20,8 +20,8 @@ resourcesBox.addEventListener('click', () => {
           resourceContainer.innerHTML = '<p>No resources available at the moment.</p>';
         } else {
 
-          const resourceList = resources.map(url => {
-            return `<div class="resource-item"><a href="${url}" target="_blank">${url}</a></div>`;
+          const resourceList = resources.map(resourceObject => {
+            return `<div class="resource-item"><a href="${resourceObject.resource_url}" target="_blank">${resourceObject.name}</a></div>`;
           }).join('');          
           
 
